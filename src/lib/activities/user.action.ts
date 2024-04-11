@@ -6,7 +6,7 @@ import connectMongoDB from "../mongodb";
 export async function createUser(user:any) {
     try{
         await connectMongoDB();
-        const newUser = new User(user);
+        const newUser =await new User(user);
         return JSON.parse(JSON.stringify(newUser))
     }
     catch(error){
