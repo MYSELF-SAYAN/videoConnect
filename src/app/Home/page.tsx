@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { UserButton } from "@clerk/nextjs";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
@@ -18,20 +18,37 @@ import {
 import { Label } from "@/components/ui/label";
 import { currentUser } from "@clerk/nextjs";
 import axios from "axios";
+import { useUser } from "@clerk/nextjs";
+import { Badge } from "@/components/ui/badge";
+import { TiDeleteOutline } from "react-icons/ti";
+import { set } from "mongoose";
 
 const page = () => {
+  const { isLoaded, isSignedIn, user } = useUser();
+  const [roomName, setRoomName] = useState("");
+  const [roomDetails, setRoomDetails] = useState("");
+  const [roomTags, setRoomTags] = useState<string[]>([]);
+  const [roomCreator, setRoomCreator] = useState("");
+  const [roomRepository, setRoomRepository] = useState("");
+  const [username, setUsername] = useState(user?.username);
+  const [tag, setTag] = useState("");
+  const getUser = async () => {
+    console.log(username);
+  };
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const data = await axios.post("http://localhost:3000/api/all-rooms", {
-      roomName: "My room",
-      roomDetails: "roomDetails",
-      roomTags: "roomTags",
-      roomCreator: "roomCreator",
-      roomRepository: "roomRepository",
+      roomName: roomName,
+      roomDetails: roomDetails,
+      roomTags: roomTags,
+      roomCreator: username,
+      roomRepository: roomRepository,
     });
     console.log(data);
   };
-
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <div className=" flex  bg-gradient-to-b from-[#000000] to-[#2e1c42] min-h-screen text-white relative">
       <div className="w-full px-10 overflow-y-auto">
@@ -43,7 +60,7 @@ const page = () => {
         </div>
         <div className="flex items-center mt-10 w-1/2">
           <Input
-            type="email"
+            type="text"
             placeholder="Search keywords"
             className="rounded-3xl border-2 placeholder:text-gray-400 mr-5"
           />
@@ -66,10 +83,7 @@ const page = () => {
               <DialogContent className="sm:max-w-[425px] text-white bg-black min-w-[50%]">
                 <DialogHeader>
                   <DialogTitle>Create Room</DialogTitle>
-                  <DialogDescription>
-                    Make changes to your profile here. Click save when you're
-                    done.
-                  </DialogDescription>
+                  <DialogDescription>Fill all the details</DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                   <div className="grid grid-cols-4 items-center gap-4">
@@ -78,7 +92,14 @@ const page = () => {
                     </Label>
                     <Input
                       id="name"
-                      placeholder="Add a title"
+                      value={roomName}
+                      placeholder="Add a roomname"
+                      onChange={(e) => {
+                        const inputValue = e.target.value;
+                        if (inputValue.length <= 30) {
+                          setRoomName(inputValue);
+                        }
+                      }}
                       className="col-span-3"
                     />
                   </div>
@@ -90,24 +111,73 @@ const page = () => {
                       id="username"
                       placeholder="Add a short description"
                       className="col-span-3"
+                      value={roomDetails}
+                      onChange={(e) => {
+                        const inputValue = e.target.value;
+                        if (inputValue.length <= 100) {
+                          setRoomDetails(inputValue);
+                        }
+                      }}
                     />
                   </div>
                   <div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="name" className="text-center">
+                    <div className="grid grid-cols-4 items-center ">
+                      <Label htmlFor="name" className="text-center ">
                         Tags
                       </Label>
-                      <Input
-                        id="username"
-                        placeholder="Add relevant tags (Max 4 tags)"
-                        className="col-span-3"
-                      />
+                      <div className="flex col-span-3 ">
+                        <Input
+                          id="username"
+                          value={tag}
+                          placeholder="Add relevant tags (Max 4 tags & upto 15 characters each.)"
+                          className="col-span-2"
+                          onChange={(e) => {
+                            const inputValue = e.target.value;
+                            if (inputValue.length <= 15) {
+                              setTag(inputValue);
+                            }
+                          }}
+                        />
+                        <Button
+                          variant={"outline"}
+                          onClick={() => {
+                            setRoomTags([...roomTags, tag]);
+                            setTag("");
+                          }}
+                          disabled={roomTags.length === 4 ? true : false}
+                        >
+                          Add
+                        </Button>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm text-gray-400">
-                        Separate tags with commas
-                      </p>
-                    </div>
+                    {roomTags.length === 0 ? (
+                      <div></div>
+                    ) : (
+                      <div className="grid grid-cols-4 mt-4">
+                        <Label htmlFor="name" className="text-center ">
+                          Added tags
+                        </Label>
+                        <div className="col-span-3 grid grid-cols-4 gap-4">
+                          {roomTags.map((tag, index) => (
+                            <Badge
+                              variant="outline"
+                              className="flex items-center justify-center bg-white text-black"
+                            >
+                              <p>{tag}</p>
+                              <span>
+                                <TiDeleteOutline
+                                  className=" text-2xl"
+                                  onClick={() => {
+                                    roomTags.splice(index, 1);
+                                    setRoomTags([...roomTags]);
+                                  }}
+                                />
+                              </span>
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                   <div className="grid grid-cols-4 items-center gap-4">
                     <Label htmlFor="name" className="text-center">
@@ -117,11 +187,37 @@ const page = () => {
                       id="username"
                       placeholder="Add a repository link"
                       className="col-span-3"
+                      value={roomRepository}
+                      onChange={(e) => {
+                        setRoomRepository(e.target.value);
+                      }}
                     />
                   </div>
                 </div>
-                <DialogFooter>
-                  <Button type="submit" variant="outline" onClick={handleSubmit}>
+                <DialogFooter className="items-center">
+                  {roomName.length === 0 ||
+                  roomDetails.length === 0 ||
+                  roomTags.length === 0 ||
+                  roomRepository.length === 0 ? (
+                    <Label className=" text-red-600">Fill all details</Label>
+                  ) : (
+                    <Label className=" text-green-600">
+                      All details filled
+                    </Label>
+                  )}
+                  <Button
+                    type="submit"
+                    variant="outline"
+                    onClick={handleSubmit}
+                    disabled={
+                      roomName.length === 0 ||
+                      roomDetails.length === 0 ||
+                      roomTags.length === 0 ||
+                      roomRepository.length === 0
+                        ? true
+                        : false
+                    }
+                  >
                     Create Room
                   </Button>
                 </DialogFooter>

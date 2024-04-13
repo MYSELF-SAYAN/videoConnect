@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { unique } from "next/dist/build/utils";
+
 const userSchema = new Schema({
   clerkId: {
     type: String,
@@ -15,6 +15,12 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  rooms: {
+    type: Array,
+    default: [],
+  },
 });
-const User=mongoose.models.user || mongoose.model("user", userSchema);
+
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+
 export default User;
