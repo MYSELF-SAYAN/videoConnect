@@ -89,7 +89,7 @@ const page = () => {
         },
       });
       setCallDetail(call);
-      const meetingLink = `${process.env.NEXT_PUBLIC_DOMAIN}${call.id}`;
+      const meetingLink = `${process.env.NEXT_PUBLIC_DOMAIN}/room/${call.id}`;
       return meetingLink;
     } catch (err) {
       console.log(err);
