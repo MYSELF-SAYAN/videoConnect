@@ -21,34 +21,81 @@ import axios from "axios";
 import { useUser } from "@clerk/nextjs";
 import { Badge } from "@/components/ui/badge";
 import { TiDeleteOutline } from "react-icons/ti";
-import { set } from "mongoose";
+import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { link } from "fs";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const { isLoaded, isSignedIn, user } = useUser();
   const [roomName, setRoomName] = useState("");
   const [roomDetails, setRoomDetails] = useState("");
   const [roomTags, setRoomTags] = useState<string[]>([]);
-  const [roomCreator, setRoomCreator] = useState("");
   const [roomRepository, setRoomRepository] = useState("");
-  const [username, setUsername] = useState(user?.username);
   const [tag, setTag] = useState("");
-  const getUser = async () => {
-    console.log(username);
-  };
+  const [value, setValue] = useState({
+    dateTime: new Date(),
+    description: "",
+    link: "",
+  });
+  const [callDetail, setCallDetail] = useState<Call>();
+  const router = useRouter();
+  const client = useStreamVideoClient();
+
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    const data = await axios.post("http://localhost:3000/api/all-rooms", {
-      roomName: roomName,
-      roomDetails: roomDetails,
-      roomTags: roomTags,
-      roomCreator: username,
-      roomRepository: roomRepository,
-    });
-    console.log(data);
+
+    const userId = user?.publicMetadata?.userId;
+
+    if (!userId) {
+      console.error("User ID not available");
+      return;
+    }
+
+    try {
+      const link=await createRoom();
+      const data = await axios.post(
+        `http://localhost:3000/api/my-rooms/${userId}`,
+        {
+          roomName: roomName,
+          roomDetails: roomDetails,
+          roomTags: roomTags,
+          roomCreator: user?.username,
+          roomRepository: roomRepository,
+          roomLink: link,
+        }
+      );
+      console.log(userId);
+      console.log(data);
+    } catch (error) {
+      console.error("Error sending POST request:", error);
+    }
   };
-  useEffect(() => {
-    getUser();
-  }, []);
+
+  const createRoom = async () => {
+    if (!client || !user) {
+      return;
+    }
+    try {
+      const id = crypto.randomUUID();
+      const call = client.call("default", id);
+      if (!call) {
+        throw new Error("Call not found");
+      }
+      const startsAt =
+        value.dateTime.toISOString() || new Date(Date.now()).toISOString();
+      await call.getOrCreate({
+        data: {
+          starts_at: startsAt,
+        },
+      });
+      setCallDetail(call); 
+      const meetingLink=`http://localhost:3000/room/${call.id}`
+      return meetingLink;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className=" flex  bg-gradient-to-b from-[#000000] to-[#2e1c42] min-h-screen text-white relative">
       <div className="w-full px-10 overflow-y-auto">
@@ -64,7 +111,10 @@ const page = () => {
             placeholder="Search keywords"
             className="rounded-3xl border-2 placeholder:text-gray-400 mr-5"
           />
-          <Button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 min-w-32">
+          <Button
+            className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 min-w-32"
+            onClick={createRoom}
+          >
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
               Search

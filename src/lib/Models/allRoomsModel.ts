@@ -22,6 +22,10 @@ const allRoomsSchema = new Schema(
       type: String,
       required: true,
     },
+    roomLink: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
