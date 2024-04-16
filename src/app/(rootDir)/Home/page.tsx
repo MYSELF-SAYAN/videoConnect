@@ -54,7 +54,7 @@ const page = () => {
     try {
       const link = await createRoom();
       const data = await axios.post(
-        `http://localhost:3000/api/my-rooms/${userId}`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/my-rooms/${userId}`,
         {
           roomName: roomName,
           roomDetails: roomDetails,
