@@ -52,7 +52,7 @@ const page = () => {
     }
 
     try {
-      const link=await createRoom();
+      const link = await createRoom();
       const data = await axios.post(
         `http://localhost:3000/api/my-rooms/${userId}`,
         {
@@ -88,8 +88,8 @@ const page = () => {
           starts_at: startsAt,
         },
       });
-      setCallDetail(call); 
-      const meetingLink=`http://localhost:3000/room/${call.id}`
+      setCallDetail(call);
+      const meetingLink = `${process.env.NEXT_PUBLIC_DOMAIN}${call.id}`;
       return meetingLink;
     } catch (err) {
       console.log(err);
