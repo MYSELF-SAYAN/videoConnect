@@ -22,7 +22,6 @@ import { useUser } from "@clerk/nextjs";
 import { Badge } from "@/components/ui/badge";
 import { TiDeleteOutline } from "react-icons/ti";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
-import { link } from "fs";
 import { useRouter } from "next/navigation";
 
 const page = () => {
@@ -54,6 +53,7 @@ const page = () => {
     try {
       const link = await createRoom();
       const data = await axios.post(
+        
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/my-rooms/${userId}`,
         {
           roomName: roomName,
@@ -64,8 +64,6 @@ const page = () => {
           roomLink: link,
         }
       );
-      console.log(userId);
-      console.log(data);
     } catch (error) {
       console.error("Error sending POST request:", error);
     }
