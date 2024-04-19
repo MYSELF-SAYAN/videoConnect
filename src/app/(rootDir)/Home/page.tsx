@@ -116,6 +116,7 @@ const page = () => {
         room.roomTags.includes(search.toLowerCase())
       );
     });
+    
     await setFilteredRooms(rooms);
   };
 
