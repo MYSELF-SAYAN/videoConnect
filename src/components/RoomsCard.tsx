@@ -14,14 +14,16 @@ import { FaCopy } from "react-icons/fa";
 interface RoomsCardProps {
   room: {
     roomName: string;
-    roomDescription: string;
+    roomDetails: string;
     roomTags: string[];
     roomLink: string;
     roomRepository: string;
     roomCreator: string;
   };
 }
+
 const RoomsCard: React.FC<RoomsCardProps> = ({ room }) => {
+ // console.log(room)
   const redirect = (link: string) => () => {
     window.open(link, "_blank");
   }
@@ -35,7 +37,7 @@ const RoomsCard: React.FC<RoomsCardProps> = ({ room }) => {
           <p>{room.roomName}</p>
           <span className="cursor-pointer" onClick={(event: React.MouseEvent<HTMLSpanElement>) => copyToClipboard(room.roomLink)}><FaCopy/></span>
         </CardTitle>
-        <CardDescription>{room.roomDescription}</CardDescription>
+        <CardDescription>{room.roomDetails}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-3 gap-x-2">

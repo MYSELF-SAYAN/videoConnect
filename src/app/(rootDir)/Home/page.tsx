@@ -45,7 +45,10 @@ const page = () => {
   const [loading, setLoading] = useState(true);
   const [callDetail, setCallDetail] = useState<Call>();
   const client = useStreamVideoClient();
-
+  const refetch = async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN}/api/all-rooms`);
+    setFilteredRooms(response.data);
+  };
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -80,10 +83,7 @@ const page = () => {
       console.error("Error sending POST request:", error);
     }
   };
-  const refetch = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_DOMAIN}/api/all-rooms`);
-    setAllRooms(response.data);
-  };
+  
   const createRoom = async () => {
     if (!client || !user) {
       return;
