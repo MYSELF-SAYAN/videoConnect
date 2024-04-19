@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import StreamVideoProvider from "@/providers/StreamClientProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
@@ -8,6 +9,7 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       
         <StreamVideoProvider>{children}</StreamVideoProvider>
       
+        <Toaster />
     </main>
   );
 };

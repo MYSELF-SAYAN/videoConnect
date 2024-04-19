@@ -12,32 +12,32 @@ export default function Home() {
     {
       text: "Find",
       className:
-        "text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
+        "text-xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
     },
     {
       text: "your",
       className:
-        "text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
+        "text-xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
     },
     {
       text: "perfect",
       className:
-        "text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
+        "text-xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
     },
     {
       text: "pair",
       className:
-        "text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
+        "text-xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
     },
     {
       text: "with",
       className:
-        "text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
+        "text-xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
     },
     {
       text: "BroCoder",
       className:
-        "text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
+        "text-xl font-bold tracking-tighter sm:text-5xl xl:text-6xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans",
     },
   ];
   return (
@@ -49,10 +49,10 @@ export default function Home() {
         duration: 0.8,
         ease: "easeInOut",
       }}
-      className="h-screen bg-neutral-950 text-white flex flex-col justify-center items-center"
+      className="h-screen bg-neutral-950 text-white flex flex-col justify-center items-center overflow-hidden overflow-y-hidden"
     >
       <header className="w-full px-4 lg:px-6 z-10">
-        <div className="container mx-auto flex justify-between items-center h-14 mt-5">
+        <div className="container mx-auto flex justify-between items-center h-14 mt-5 md:flex-row flex-col gap-y-5">
           <p className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-3xl bg-clip-text   text-center font-sans ">
             BroCoder
           </p>

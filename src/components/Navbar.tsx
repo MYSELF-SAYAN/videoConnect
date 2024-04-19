@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
           >
             <ul className="bg-gradient-to-b from-[#4d336b] to-[#382151] border-2 border-white rounded-xl ">
               <li className="border-b-2 border-white py-2 px-2 cursor-pointer" onClick={() => router.push("/Home")}>/Home</li>
-              <li className=" py-2 px-2 cursor-pointer" onClick={() => router.push("/my-rooms")}>/My rooms</li>
+              <li className=" py-2 px-2 cursor-pointer" onClick={() => router.push("/myrooms")}>/My rooms</li>
             </ul>
           </motion.div>
         )}
