@@ -1,42 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+##  Index
+1.  [Introduction](#introduction)
+2.  [Demo](#demo)
+3.  [Technologies](#technologies)
+4.  [Contributing](#contributing)
+# <a name="introduction"> BroCodes </a>
+
+🚀 Excited to unveil BroCoder, a cutting-edge pair coding platform designed to revolutionize collaborative development! 🤝
 
 
+Key Features:
+
+🎨 Modern UI: I've crafted a visually stunning interface using Shadcn UI, Acceternity UI, and Tailwind CSS. The design not only looks great but also enhances usability for an exceptional coding experience.
+
+🤝 Collaborative Coding: Seamlessly collaborate with multiple developers on the same project in real-time. Enhance productivity and creativity through synchronized coding sessions.
+
+📹 Video Rooms: Engage in immersive video rooms with integrated screen sharing, mic, and camera controls. Collaborate effectively without leaving the coding environment.
+
+🖥️ Layout Customization: Customize your workspace with flexible layout options. Adapt the view to your preferences for an optimized coding experience.
+
+🔒 Secure Authentication: I've integrated Clerk for authentication, ensuring a secure and hassle-free login experience. Protect your data and enjoy seamless user interactions.
+Join me on this coding adventure, where innovation meets collaboration. Let's code together, grow together, and build something extraordinary with BroCodes!
+
+
+## <a name="demo"> Demo </a>
 
 https://github.com/MYSELF-SAYAN/videoConnect/assets/116438215/1749c4d2-07e1-4653-836f-55b26854b770
 
-der="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## <a name="technologies"> 🛠 Tech-stacks </a>
+**Frontend:** Next.js, Shadcn UI, Acceternity UI, Tailwind CSS
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Backend:** Clerk (for authentication), MongoDB (for database), 
+Stream API (for video integration)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## <a name="contributing"> Contributing </a>
 
-## Learn More
+Contributions are always welcome!
 
-To learn more about Next.js, take a look at the following resources:
+Feel free to raise issues and raise pull requests.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
