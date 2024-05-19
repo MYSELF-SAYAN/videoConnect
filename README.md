@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-https://firebasestorage.googleapis.com/v0/b/twitter-x-clone-f142c.appspot.com/o/Project%20videos%2F1713544790001.mp4?alt=media&token=782cb853-da91-40e3-8d63-2e20f48421f1
+<iframe width="560" height="315" src="[https://www.youtube.com/embed/VIDEO_ID](https://firebasestorage.googleapis.com/v0/b/twitter-x-clone-f142c.appspot.com/o/Project%20videos%2F1713544790001.mp4?alt=media&token=782cb853-da91-40e3-8d63-2e20f48421f1)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 First, run the development server:
 
